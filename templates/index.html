@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>End to End Project</title>
+<link rel="stylesheet" type="text/css" href= "style.css">
+<style>
+    body { 
+     background-image: url("https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGhvbWV8ZW58MHx8MHx8&w=1000&q=80");
+    background-repeat: repeat-x; 
+}
+h1 {
+    color: rgb(14, 15, 9);
+}
+p {
+    color: red;
+}
+
+
+
+.form {
+
+    height: 100%;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: beige;
+    opacity: 0.95;
+    border: 3px solid green;
+    /* z-index: -10; */
+
+}
+h1{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h2,h3{
+    text-align: center;
+    font-family: sans-serif;
+    text-decoration: underline;
+}
+img{
+    height: 50%;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 20px;
+}
+input[type=file], select {
+    width: 100%;
+    background-color: #4CAF50;
+    color: rgb(248, 248, 248);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    font-size: large;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  
+  input[type=submit] {
+    width: auto;
+    background-color: #3105f3;
+    color: rgb(248, 248, 248);
+    padding: 14px 20px;
+    margin:0% 45%;
+    border: none;
+    text-decoration: solid;
+    font-size: large;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+
+</style>
+</head>
+<body>
+   
+   <div class="form">
+   
+     <h1> Check how modern is your property! </h1><br>
+
+    <div>
+        <form action="{{url_for('predict')}}" method="post" enctype="multipart/form-data">
+            <h2>Upload a photo of any room in your house.</h2>
+            <input name="img" type="file" accept="image/*">
+            <input type="submit">
+
+        </form>
+     </div>
+ 
+
+
+    {% if pred_output %}
+    <h2>Predicted label: {{pred_output.label}} with {{pred_output.probability}}% confidence.</h2> 
+    {% endif %}
+
+    {% if user_image %}
+    <img src="{{ user_image }}" alt="User Image">
+    {% endif %}
+
+    {% if img_shape %}
+    <h3>The shape for the image is {{img_shape}}.</h3> 
+    {% endif %}
+</div>
+</body>
+</html> 
